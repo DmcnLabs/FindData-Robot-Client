@@ -261,7 +261,7 @@ INSERT INTO `cloud_auth_rule` VALUES ('136', 'robot/debugrobot', 'Test collectio
 INSERT INTO `cloud_auth_rule` VALUES ('135', 'robot/startrun', 'Start collection', '1', '1', '', '116', '', '0', '0', '1', '1521530818', '2021-03-01 17:25:36');
 INSERT INTO `cloud_auth_rule` VALUES ('137', 'robot/copy', 'Copy data source', '1', '1', '', '116', '', '0', '0', '1', '1521538994', '2020-03-20 17:43:14');
 INSERT INTO `cloud_auth_rule` VALUES ('126', 'robot/edit', 'Edit data source', '1', '1', '', '116', '', '0', '0', '1', '1521088299', '2020-03-15 12:31:39');
-INSERT INTO `cloud_auth_rule` VALUES ('125', 'robot/add', 'New data source', '1', '1', '', '116', '', '1', '0', '1', '1521088281', '2020-03-20 14:46:28');
+INSERT INTO `cloud_auth_rule` VALUES ('125', 'robot/add', 'New robot', '1', '1', '', '116', '', '1', '0', '1', '1521088281', '2020-03-20 14:46:28');
 INSERT INTO `cloud_auth_rule` VALUES ('127', 'robot/index', 'Data source list', '1', '1', '', '116', '', '1', '0', '1', '1521093668', '2020-03-15 14:01:08');
 INSERT INTO `cloud_auth_rule` VALUES ('119', 'user/add', 'Increase membership', '1', '1', '', '100', '', '0', '0', '1', '1521081526', '2020-03-19 17:22:40');
 INSERT INTO `cloud_auth_rule` VALUES ('115', 'index/index', 'Home', '1', '1', '', '0', 'tachometer', '1', '0', '0', '1521078076', '2020-03-15 14:56:54');

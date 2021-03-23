@@ -1305,7 +1305,7 @@ return  array(
     'robot_robotdetail' => 'DataDetail',
     'robot_robot_dateline' => 'CreateTime',
     'robot_robot_sourceprepayment' => 'Reward',
-    'robot_robot_robot_time' => 'LastUp',
+    'robot_robot_robot_time' => 'Update time',
     'robot_next_run_time' => 'NextExecutionTime',
     'robot_data_url' => 'DataUrlConfig',
     'robot_data_filed' => 'DataFieldConfig',
