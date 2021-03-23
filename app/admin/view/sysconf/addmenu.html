@@ -1,0 +1,183 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<style>
+
+
+</style>
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">System settings</a></li>
+                    <li class="active">Background menu settings</li>
+                </ul>
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+                    </form>
+                </div><!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                Background menu settings
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Modify and set background menu
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="space-12"></div>
+                        <div class="tab-pane active">
+                            <form method="post" name="thevalueform"  class="form-horizontal" id="theform" action="http://www.finndy.test/midycp.php?action=settings" enctype="multipart/form-data">
+                                <div class="space-12"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > title </label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  name="menuname"  class="col-xs-10 col-sm-5">
+                                        <span class="help-inline col-xs-12 col-sm-7 pt">
+                                            <span class="middle">Configuration title for background display</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Module </label>
+                                    <div class="col-sm-10">
+                                        <select name="module" id="" class="col-xs-10 col-sm-5">
+                                            <option value="0">Background module</option>
+                                            <option value="1">Front desk module</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Superior menu </label>
+                                    <div class="col-sm-10">
+                                        <select name="parentmenu" id="" class="col-xs-10 col-sm-5">
+                                            <option value="0">Top level menu</option>
+                                            <option value="1">data management</option>
+                                            <option value="1">user management</option>
+                                            <option value="1">System settings</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Font Icon </label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  name="font" class="col-xs-10 col-sm-5">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Link </label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  name="sec_title" class="col-xs-10 col-sm-5">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Background menu </label>
+                                    <div class="col-sm-10 pt">
+                                        <label >
+                                            <input name="show" type="radio" checked class="ace">
+                                            <span class="lbl">YES</span>
+                                        </label>
+                                        <label style="margin-left: 50px;">
+                                            <input name="show" type="radio" class="ace">
+                                            <span class="lbl">NO</span>
+                                        </label>
+                                        <div  class="col-xs-12 " style="margin-left: -12px;">
+                                            Mark as background menu
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Pjax load </label>
+                                    <div class="col-sm-10 pt">
+                                        <label >
+                                            <input name="pjax" type="radio" checked class="ace">
+                                            <span class="lbl">YES</span>
+                                        </label>
+                                        <label style="margin-left: 50px;">
+                                            <input name="pjax" type="radio" class="ace">
+                                            <span class="lbl">NO</span>
+                                        </label>
+                                        <div  class="col-xs-12 " style="margin-left: -12px;">
+                                            After marking the background menu, do you want to open the page in pjax mode
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 label_control no-padding-right" > Sort </label>
+                                    <div class="col-sm-10">
+                                        <input type="text"  name="sort" class="col-xs-10 col-sm-5">
+                                    </div>
+                                </div>
+                                <div class="space-12"></div>
+                                <div class="row ">
+                                    <div class="col-xs-12 align-center">
+                                        <input type="submit" name="thevaluesubmit" value="Submit" class="btn btn-info input-small" onclick="this.form.action+='&subtype=comments';">
+                                        <input type="reset" class="btn btn-light input-small" name="thevaluereset" value="reset">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+</div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script>
+
+    function validate (theform){
+        var addusername = $('#addusername').val();
+        var adduserpwd = $('#adduserpwd').val();
+        if(addusername == '' ){
+            alert('The user name cannot be empty');
+            return false;
+        }
+        if(adduserpwd == '' ){
+            alert('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+    function edit_validate (theform){
+        var editusername = $('#editusername').val();
+        var editpwd = $('#editpwd').val();
+
+        if(editusername == '' ){
+            alert('The user name cannot be empty');
+            return false;
+        }
+        if(editpwd == '' ){
+            alert('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+
+
+</script>

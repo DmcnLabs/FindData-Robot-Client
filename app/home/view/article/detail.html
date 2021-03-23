@@ -1,0 +1,80 @@
+{include file="public/header"}
+<link rel="stylesheet" href="__HOME__/css/article.css" type="text/css"/>
+<div id="wrapper" style="min-height:1000px">
+
+    <div id="wrapper">
+        <div id="container">
+            <div id="content">
+                <div class="post" id="post-19563" style="
+                    margin-top: 10px;">
+                    <div class="path"><a href='#'>Home</a> >
+                        <a href='{:url('article/index',array('cateid'=>$crumbCates[0]['id']))}'>{$crumbCates[0][name]}</a>
+                        {if condition="$crumbCates[1] neq '' "}
+                        >
+                        <a href='{:url('article/index',array('cateid'=>$crumbCates[1]['id']))}'>{$crumbCates[1][name]}</a>>
+
+                        {$articles.title|msubstr=0,20}
+                        {else/}
+                        > {$articles.title|msubstr=0,20}
+                        {/if}
+                    </div>
+                    <div class="single_entry single2_entry">
+                        <div class="entry fewcomment" style="background: #fff;">
+                            <div class="title_container">
+                                <h2 class="title single_title">
+                                    <span>{$articles.title}</span><span class="title_date"></span></h2>
+                                <p class="single_info">Time：{$articles.create_time} 12:28</p>
+                            </div>
+                            <div class="div-content">
+
+                                {$articles.content}
+
+                                <center id="pagenav">
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="widget">
+
+                    <div class="hotart">
+                        Hot Content
+                    </div>
+                    <ul id="ulHot">
+
+                        {volist name="hotRes" id="hotArt"}
+                        <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
+                            <div style="float:left;width:85px;height:55px; overflow:hidden;">
+                                <a href="{:url('Article/index',array('artid'=>$hotArt['id']))}" target="_blank">
+                                    {if condition="$hotArt['thumb'] neq ''"}
+                                    <img {if condition="$Think.config.file_save_method eq 1 " }
+                                         src="{$hotArt.thumb|oss_display_image=1}" {else /} src="__CDN__{$hotArt.thumb}" {/if}
+                                    width="83">
+                                    {else /}
+                                    <img src="__HOME__/image/finndy64.png"  width="55">
+                                    {/if}
+                                </a>
+                            </div>
+                            <div style="float:right;width:145px;height:52px; overflow:hidden;">
+                                <a href="{:url('Article/index',array('artid'=>$hotArt['id']))}" target="_blank" title="{$hotArt.title}">{$hotArt.title}</a>
+                            </div>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__HOME__/js/z700bike_global.js"></script>
+    <script type="text/javascript" src="__HOME__/js/z700bike_single.js"></script>
+</div>
+
+
+{include file="public/footer"}
+
+
+

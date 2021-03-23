@@ -1,0 +1,120 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Article settings</a></li>
+                    <li class="active">Category list</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                Category list
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Category view and edit
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn  btn-info btn-sm btn-round"   onclick="javascript:window.location.href= '{:url('category/add')}' ">New category</button>
+                                </div>
+
+                            </div>
+                        </div><!-- /.page-header -->
+                        <form class="" action="{:url('category/sort')}" method="post">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th width="5%">sort</th>
+                                        <th>ID</th>
+                                        <th>Category name</th>
+                                        <th>Creation time</th>
+                                        <th>Options</th>
+
+                                    </tr>
+                                    <!--数据行-->
+                                    {if empty($categoryRes)}
+                                        <tr><td colspan="5" align="center" style="height:60px;color:#666;">No data available</td></tr>
+                                    {else/}
+                                    {volist name='categoryRes' id='category'}
+                                    <tr>
+                                        <td><input class="input-medium" style="width:40px;height:25px;" type="text"
+                                                   name="{$category['id']}" value="{$category['sort']}"></td>
+                                        <td>{$category.id}</td>
+                                        <td><?php if($category['level']!=0){echo '|';} echo str_repeat('—', $category['level']*1)?>&nbsp;{$category.name}</td>
+                                        <td>{$category.create_time}</td>
+                                        <td>
+
+                                            <button type="button" class="btn btn-mini  btn-info btn-round" onclick="javascript:window.location.href= '{:url('category/edit',['id'=>$category.id])}' "><i class="ace-icon fa fa-pencil-square-o "></i> edit</button>
+                                            <button class="btn btn-mini btn-danger tooltip-error runstyle  " id="{$category.id}" type="button" onclick="delData(this)" data-rel="tooltip" data-original-title="delete"><i class="ace-icon fa fa-times-circle"></i>delete</button>
+                                        </td>
+                                    </tr>
+
+
+                                {/volist}
+                                    <tr>
+                                        <td>
+                                            <button type="submit" class="btn btn-mini  btn-info btn-round" ><i class="ace-icon fa fa-pencil-square-o "></i>sort</button>
+                                        </td><td colspan="4"></td>
+                                    </tr>
+                                {/if}
+                                </tbody>
+                            </table>
+                        </form>
+
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script>
+    function delData(obj){
+        var id = obj.id;
+        var url = "{:url('category/del',array('id'=>"replace"))}";
+        var url = url.replace('replace' , id);
+        bootbox.dialog({
+            message: "Are you sure to delete?",
+            buttons:
+                {
+                    "button" :
+                        {
+                            "label" : "Do not delete",
+                            "className" : "btn-sm"
+                        },
+                    "danger_one" :
+                        {
+                            "label" : "Delete now",
+                            "className" : "btn-sm btn-danger",
+                            "callback": function() {
+                                window.location.href=url;
+                            }
+                        }
+                }
+        });
+    }
+
+</script>

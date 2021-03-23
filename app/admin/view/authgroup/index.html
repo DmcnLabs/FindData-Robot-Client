@@ -1,0 +1,138 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">user management</a></li>
+                    <li class="active">User group settings</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                User group settings
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    User group settings
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn  btn-info btn-sm btn-round"  onclick="javascript:window.location.href= '{:url('authgroup/add')}' ">New user group</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                        <div class="modal-dialog" role="document">
+
+                                            <div class="modal-content" style="width:350px;margin:180px auto" >
+                                                <div class="modal-body">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel"> Add user group</h4></div><br>
+                                                    <form action="{:url('authgroup/add')}" method="POST" id="addsubmit" onsubmit="return validate(this)">
+                                                        <div class="form-group" >
+                                                            <label  for class="control-label ml35">User group name:</label>
+                                                            <input type="text" class="form-control inputstyle" id="addusername" name="title" >
+                                                        </div>
+                                                        <div class="form-group" >
+                                                            <label  for class="control-label ml35">User group description:</label>
+                                                            <input type="text" class="form-control inputstyle" id="addusername" name="remark" >
+                                                        </div>
+
+                                                        <div class="modal-footer" style="background-color: #fff;text-align: center">
+                                                            <button type="button" class="btn btn-default  btn-default btn-round " data-dismiss="modal">close</button>&nbsp;&nbsp;&nbsp;
+                                                            <button type="submit" class="btn btn-default  btn-info btn-round ">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.page-header -->
+
+                            <table cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User group name</th>
+                                        <th>User group description</th>
+                                        <th>Create time</th>
+                                        <th>Options</th>
+                                    </tr>
+                                    <!--数据行-->
+                                    {if empty($authgroupres)}
+                                        <tr><td colspan="5" align="center" style="height:60px;color:#666;">No data available</td></tr>
+                                    {else/}
+                                    {volist name='$authgroupres' id='authgroup'}
+                                    <tr>
+                                        <td>{$authgroup.id}</td>
+                                        <td>{$authgroup.title}</td>
+                                        <td>{$authgroup.remark}</td>
+                                        <td>{$authgroup.create_time}</td>
+                                        <td>
+                                            <div>
+
+                                                <button type="button" class="btn btn-mini  btn-info btn-round"  onclick="javascript:window.location.href= '{:url('authgroup/edit',['groupid'=>$authgroup.id])}' "><i class="ace-icon fa fa-pencil-square-o "></i>edit</button>
+                                                <button class="btn btn-mini btn-danger tooltip-error runstyle  " id="{$authgroup.id}" onclick="delData(this)" type="button" data-rel="tooltip" data-original-title="delete"><i class="ace-icon fa fa-times-circle"></i>delete</button>
+                                        </td>
+                                    </tr>
+                                {/volist}
+                                {/if}
+                                </tbody>
+                            </table>
+                        <div style="float:right;padding-top:10px;">
+                            {$authgroupres->render()}
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script>
+    function delData(obj){
+        var id = obj.id;
+        var url = "{:url('authgroup/del',array('groupid'=>"replace"))}";
+        var url = url.replace('replace' , id);
+        bootbox.dialog({
+            message: "Are you sure to delete?",
+            buttons:
+                {
+                    "button" :
+                        {
+                            "label" : "Do not delete",
+                            "className" : "btn-sm"
+                        },
+                    "danger_one" :
+                        {
+                            "label" : "Delete now",
+                            "className" : "btn-sm btn-danger",
+                            "callback": function() {
+                                window.location.href=url;
+                            }
+                        }
+                }
+        });
+    }
+</script>

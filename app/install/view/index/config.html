@@ -1,0 +1,179 @@
+{extend name="public/base"/}
+{block name="main"}
+<h2 class="text-center">Create database</h2>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<form method="post" action="{:url('index/config')}" target="_self" id="form-1" class="layui-form">
+	<div class="create-database">
+		<h2>
+			Database Connection
+		</h2>
+		<table class="table-hover table ">
+			<input type="hidden" name="db[type]" value="mysql" >
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[hostname]" type="text" value="localhost" required />
+				</td>
+				<td>
+					<span>
+						Database IP(127.0.0.1/localhost/...)
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[database]" type="text" value="finddata_robot_client" required />
+				</td>
+				<td>
+					<span>
+						Database Name
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[username]" type="text" value="root" required  />
+				</td>
+				<td>
+					<span>
+						Database Username
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[password]" type="text" value=""  required />
+				</td>
+				<td>
+					<span>
+						Database Password
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[hostport]" type="text" value="3306" class="layui-input"  required />
+				</td>
+				<td>
+					<span>
+						Database Port(3306/...)
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="db[prefix]" type="text" value="{:config('original_table_prefix')}" class="form-control" required />
+				</td>
+				<td>
+					<span>
+						Database Table Prefix
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<div class="create-database">
+		<h2>
+			Robot Client Config
+		</h2>
+		<table class="table-hover table">
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="webconfig[web_site_title]" type="text" value="FindData Robot Client" required/>
+				</td>
+				<td>
+					<span>
+						Robot Client Name
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="webconfig[index_url]" type="text" value="{$Request.domain}" required/>
+				</td>
+				<td>
+					<span>
+						Robot Client domain
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="webconfig[web_site_keyword]" type="text" value="finddata,blockchain,bigdata" required />
+				</td>
+				<td>
+					<span>
+						Robot Client keywords
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="webconfig[web_site_description]" type="text" value="The Worlds Most Efficient Way to Mine Data From the Internet" required />
+				</td>
+				<td>
+					<span>
+						Robot Client description
+					</span>
+				</td>
+			</tr>
+		</table>
+		</div>
+
+	<div class="create-database">
+		<h2>
+			Founder Account
+		</h2>
+		<table class="table-hover table">
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="admin[admin_username]" type="text" value="admin" required />
+				</td>
+				<td>
+					<span>
+						Username
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="admin[admin_password]" type="text" value="123456" required />
+				</td>
+				<td>
+					<span>
+						Password
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="admin[admin_repassword]" type="text" value="123456" required />
+				</td>
+				<td>
+					<span>
+						rePassword
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td width="360">
+					<input class="form-control input-sm" name="admin[admin_email]" type="text" value="admin@admin.com" required />
+				</td>
+				<td>
+					<span>
+						Email
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+<div class="margin-top">
+	<div class="text-center">
+		<a class="btn btn-default" href="{:url('index/check')}">Previous step</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-primary" id="submit" onclick="$('form').submit();return false;" type="button" style="width:123px;">Next step</button>
+	</div>
+</div>
+
+{/block}

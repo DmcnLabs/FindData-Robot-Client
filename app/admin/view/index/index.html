@@ -1,0 +1,164 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<style>
+    .outside{
+        position: relative;
+        color:#fff;
+        text-align:center;
+    }
+    .desc{
+        position: absolute;
+        left:18px;
+        top:5px;
+        font-size:19px;
+        color:#fff;
+
+    }
+    .num{
+        position: absolute;
+        left:39%;
+        top:38%;
+        font-size:30px;
+        color:#fff;
+    }
+</style>
+<script src="__ADMIN__/js/echarts.common.min.js"></script>
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content" style="">
+                <!-- /section:settings.box -->
+                <div class="page-header">
+                    <h1>
+                        Home
+                        <small>
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                            FindDataRobot
+                        </small>
+                    </h1>
+                </div><!-- /.page-header -->
+                <div class="row" >
+                    <div class="col-xs-12" >
+
+                        <div class="hr hr12 dotted"></div>
+                        <div class="clearfix">
+                            {if condition='$usertype eq 3 '}
+                            <div class="grid4 center">
+                                <span id="clkcount" class="bigger-175 blue">{$robotstatistics.all|default= 0}</span>
+
+                                <br>
+                                Total number of data sources
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$robotstatistics.today|default= 0}</span></span>
+                                <br>
+                                &nbsp;&nbsp; Number of new data sources added today
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$userscounts.all|default= 0}</span></span>
+                                <br>
+                                &nbsp;&nbsp; Total number of users
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$userscounts.week|default= 0}</span></span>
+                                <br>
+                                &nbsp;&nbsp; Number of new users in recent 7 days
+                            </div>
+                            {else /}
+                            <div class="grid4 center">
+                                <span id="clkcount" class="bigger-175 blue">{$robotstatistics.all|default= 0}</span>
+
+                                <br>
+                                Total number of data sources
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$robotstatistics.thismonth|default= 0}</span></span>
+                                <br>
+                                &nbsp;&nbsp; Number of new data sources in the last 30 days
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$robotstatistics.thisweek|default= 0}</span></span>
+                                <br>
+                                &nbsp;&nbsp; Number of new data sources in recent 7 days
+                            </div>
+                            <div class="grid4 center">
+                                <span class="bigger-175 blue">&nbsp; <span id="regcount">{$robotstatistics.today|default= 0 }</span></span>
+                                <br>
+                                &nbsp;&nbsp; Number of new data sources added today
+                            </div>
+                            {/if}
+
+                        </div>
+                        <div class="hr hr12 dotted"></div>
+                        <br>
+                        <h5 class="row" style="margin-bottom:0px;">
+                            <span class="col-sm-7">
+                                <span style="height: 28px;line-height: 28px;">
+                                    <span style="height: 28px;line-height: 28px;">Data source trend chart</span>
+                                </span>
+                            </span>
+                        </h5>
+                        <div class="widget-body" style="display: block;">
+                            <div class="widget-main padding-4">
+                                <div id="main" style="width:1700;height:360px;"></div>
+                            </div><!-- /.widget-main -->
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='__ADMIN__/js/jquery.js'>"+"<"+"/script>");
+</script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        window.onresize = myChart.resize;
+        option = {
+
+            grid:{
+                x:40,
+                x2:0,
+                y:20,
+                height:250
+            },
+            xAxis: {
+                type: 'category',
+
+                data: {$date}
+            },
+            yAxis: {
+                type: 'value',
+
+            },
+            series: [{
+                data:{$data},
+                type: 'line',
+
+            }]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>

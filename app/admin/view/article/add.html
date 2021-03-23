@@ -1,0 +1,336 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!--<link rel="stylesheet" href="__ASSETS__/libs/webupload/demo.css" />-->
+<link rel="stylesheet" href="__ASSETS__/libs/webupload/webuploader.css" />
+<link rel="stylesheet" href="__ASSETS__/libs/webupload/style.css" />
+<!--<link rel="stylesheet" href="__ASSETS__/libs/webupload/syntax.css" />-->
+<script src="__ASSETS__/libs/webupload/webuploader.js"></script>
+<style>
+    /*a.input {*/
+        /*width:70px;*/
+        /*height:40px;*/
+        /*line-height:40px;*/
+        /*background:#4ba8e5;*/
+        /*text-align:center;*/
+        /*display:inline-block;!*具有行内元素的视觉，块级元素的属性 宽高*!*/
+        /*overflow:hidden;!*去掉的话，输入框也可以点击*!*/
+        /*position:relative;!*相对定位，为 #file 的绝对定位准备*!*/
+
+        /*margin-left:20px*/
+    /*}*/
+    /*a.input:hover {*/
+        /*background:#4ba8e5;*/
+        /*color: #ffffff;*/
+    /*}*/
+    /*a{*/
+        /*text-decoration:none;*/
+        /*color:#FFF;*/
+    /*}*/
+    /*#file {*/
+        /*opacity:0;!*设置此控件透明度为零，即完全透明*!*/
+        /*filter:alpha(opacity=0);!*设置此控件透明度为零，即完全透明针对IE*!*/
+
+        /*position:absolute;!*绝对定位，相对于 .input *!*/
+        /*top:0;*/
+        /*right:0;*/
+    /*}*/
+
+
+
+    .demo {
+        width: 700px;
+        margin: 0 auto
+    }
+
+    .btn:hover {
+        background-color: #e95a00;
+        text-decoration: none
+    }
+
+    .ul_pics li {
+        float: left;
+        width: 160px;
+        height: 160px;
+        border: 1px solid #ddd;
+        padding: 2px;
+        text-align: center;
+        margin: 0 5px 5px 0;
+    }
+
+    .ul_pics li .img {
+        width: 80px;
+        height: 80px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .ul_pics li img {
+        max-width: 160px;
+        max-height: 140px;
+        vertical-align: middle;
+    }
+
+    .progress {
+        position: relative;
+        padding: 1px;
+        border-radius: 3px;
+        margin: 60px 0 0 0;
+    }
+
+    .bar {
+        background-color: green;
+        display: block;
+        width: 0%;
+        height: 20px;
+        border-radius: 3px;
+    }
+
+    .percent {
+        position: absolute;
+        height: 20px;
+        display: inline-block;
+        top: 3px;
+        left: 2%;
+        color: #fff
+    }
+</style>
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Article settings</a></li>
+                    <li class="active">New article</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                New article
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    New article
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="widget-box">
+                            <!--<div class="widget-header">-->
+                            <!--<h5 class="widget-title" style="color: #2679b5; font-size: 16px;">新增用户组</h5>-->
+                            <!--</div>-->
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-16">
+                                    <div class="row">
+                                        <form action="{:url('article/add')}" method="POST" id="addsubmit" enctype="multipart/form-data" >
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > category </label>
+                                                <div class="col-sm-10">
+                                                    <select name="cateid"  class="col-xs-10 col-sm-6" >
+                                                        <option value="0">Please select category</option>
+                                                        {volist name="categoryRes" id="category"}
+                                                        {if condition="$category.level lt 2"}
+                                                        <option value="{$category.id}">
+                                                            <?php if($category['level']!=0){echo '|';} echo str_repeat('—', $category['level']*1)?>{$category.name}</option> {/if}
+                                                        {/volist}
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > title </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"  name="title"  class="col-xs-10 col-sm-6" value="" >
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > keywords </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"  name="keywords"  class="col-xs-10 col-sm-6"  >
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > source </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text"  name="source"  class="col-xs-10 col-sm-6"  >
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > summary </label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="summary" id="" cols="30" rows="3" class="col-xs-10 col-sm-6" ></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > content </label>
+                                                <div class="col-sm-10">
+                                                    <script id="container" name="content" type="text/plain">
+                                                    </script>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > thumbnail </label>
+                                                <div class="col-sm-10" >
+                                                    <div id="uploader-demo">
+                                                        <!--用来存放item-->
+                                                        <div id="fileList" class="uploader-list" style="float:right"></div>
+                                                        <div id="imgPicker" style="float:left">upload</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-sm-1 label_control no-padding-right" > status </label>
+
+                                                <div class="col-sm-10 pt">
+
+                                                    <input name="post[poststatus]" type="checkbox"  class="ace" value="1" checked >
+                                                    <span class="lbl">publish</span> &nbsp;&nbsp;&nbsp;
+                                                    <input name="post[is_top]" type="checkbox"  class="ace" value="1" >
+                                                    <span class="lbl">top</span> &nbsp;&nbsp;&nbsp;
+                                                    <input name="post[recommended]" type="checkbox"  class="ace" value="1">
+                                                    <span class="lbl">recommend</span> &nbsp;&nbsp;&nbsp;
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="col-xs-6 align-center">
+                                                <input type="submit"  value="Submit" class="btn btn-info input-small btn-round">
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+
+
+<script type="text/javascript" src="__STATIC__/assets/libs/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__STATIC__/assets/libs/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container',{initialFrameWidth:800,initialFrameHeight:400,});
+</script>
+<script>
+    /**
+     * [remove 移除图片]
+     * @post  [file]  [文件名 （必填）]
+     * @post  [obj]  [操作对象] [前台操作数据 移除dom标志]
+     *
+     * @return
+     */
+    function removeImg(file, obj=''){
+        var url = "{:url('article/removeFile')}";
+        $.get(url ,{fileName:file},function(data){
+
+            console.log(data);
+            if(data.msg === 'ok'){
+                $('#'+obj).remove();
+            }else{
+                Msg('Deletion failed');
+            }
+        })
+    }
+    //webupload
+    $(function(){
+        var $list = $('#fileList');
+        //上传图片,初始化WebUploader
+        var uploader = WebUploader.create({
+            auto: true,// 选完文件后，是否自动上传。
+            swf: '__ADMIN__/js/Uploader.swf',//这里引入swf,根据你实际放置的位置
+            server: "{:url('article/upload')}",
+            duplicate :true,// 重复上传图片，true为可重复false为不可重复
+            //pick: '#imgPicker',// 选择文件的按钮
+            pick: {
+                id: '#imgPicker',
+                multiple:false,//单图/多图
+
+            },
+            //fileNumLimit: 1,
+            fileSizeLimit:'<?php echo config('uploadmaxsize');?>',
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/jpg,image/jpeg,image/png'
+            },
+
+            'onUploadSuccess': function(file, data, response) {
+                var up_src = data.picpath.replace("\\", "\/");
+                var save_src = data.savepath.replace("\\", "\/");
+                var imgName = data.name.replace("\\", "\/");
+
+                //编辑图片 将旧图隐藏掉
+
+                $('#thumb').attr('class','hide');
+
+                //上传成功后显示图片
+                var $li = $(
+                        '<div id="' + file.id + '" data-imgname="'+imgName+'" class="file-item thumbnail draggable-element d-"'+file.id.substr(file.id.length-1,1)+' style="position:relative;">' +
+                        '<img>' +
+                        '<a class="file-panel" href="javascript:;" onclick="removeImg(\''+imgName+'\', \''+file.id+'\')">'+
+                        '<span class="fa fa-close">Delete</span>' +
+                        '</a>' +
+                        '<input type="hidden" id="data_photo" name="thumb" value="'+save_src+'">' +
+                        '</div>'
+                    ),
+                    $img = $li.find('img');
+
+                // $list为容器jQuery实例
+                $list.append( $li );
+
+                //替换图片 删除旧图
+                var old_img_name =   $( '#'+file.id ).siblings().attr("data-imgname");
+                if(old_img_name){
+                    removeImg(old_img_name);
+                    //删除旧图
+                    $( '#'+file.id ).siblings().remove();
+                }
+                // 创建缩略图 如果为非图片文件，可以不用调用此方法 100（宽） x 100（高）
+                uploader.makeThumb( file, function( error, src ) {
+                    if ( error ) {
+                        $img.replaceWith('<span>Cant Preview</span>');
+                        return;
+                    }
+                    $img.attr( 'src', src );
+                }, 100, 100 );
+            }
+        });
+        //上传失败显示错误
+        uploader.on('uploadAccept', function (file, response) {
+            if(response.error != 0){
+                Msg(response.error);
+                return false;
+            }
+        });
+        uploader.on('error', function(handler) {
+            if (handler == "Q_EXCEED_SIZE_LIMIT") {
+                Msg('Picture size over 2M');
+            }
+        })
+    })
+
+
+</script>

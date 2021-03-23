@@ -1,0 +1,93 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">data management</a></li>
+                    <li class="active">Import  rules</li>
+                </ul>
+                <!--<div class="nav-search" id="nav-search">-->
+                    <!--<form class="form-search">-->
+								<!--<span class="input-icon">-->
+									<!--<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />-->
+									<!--<i class="ace-icon fa fa-search nav-search-icon"></i>-->
+								<!--</span>-->
+                    <!--</form>-->
+                <!--</div>&lt;!&ndash; /.nav-search &ndash;&gt;-->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                Import  rules
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Import the rule file and quickly create a data source with the same configuration
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" name="importform" id="theform" action="{:url('robot/importcopy')}" enctype="multipart/form-data">
+                    <input type="hidden" name="formhash" value="">
+
+                    <div class="colorarea01">
+
+                        <table cellspacing="0" cellpadding="0" width="100%" class="table table-bordered">
+
+                            <tbody><tr id="tr_">
+                                <th class="width-25">Rules file content<p></p><p>Please paste the content of the rule file corresponding to the data source into the text box, and pay attention to the integrity of the content</p></th>
+                                <td><textarea name="importtext" rows="12" cols="70"></textarea>
+                                </td>
+                            </tr>
+
+                            <tr id="tr_ignoreversion">
+                                <th class="width-25">Compatibility check<p></p><p>Whether to verify the rule version. It is recommended to open it</p></th>
+                                <td><label><input class="ace" name="ignoreversion" type="radio" value="0" checked=""><span class="lbl">&nbsp;check &nbsp;&nbsp;</span> </label><label><input class="ace" name="ignoreversion" type="radio" value="1"><span class="lbl">&nbsp;Unverification&nbsp;&nbsp;</span> </label></td>
+                            </tr>
+
+                            </tbody></table>
+
+                    </div>
+
+                    <div class="col-xs-12 align-center"><input type="submit" name="importsubmit" value="Import" class="btn btn-info input-small">
+
+                        &nbsp;&nbsp;<input type="reset" name="importreset" value="Reset" class="btn btn-light input-small">
+
+                    </div></form>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+
+
+
+</div><!-- /.main-container -->
+
+<script>
+    var importtext = document.getElementById("importtext");
+//    if(importtext) {
+//        if (importtext.value.length < 1 || importtext.value.length > 30) {
+//
+//            importtext.focus();
+//            Msg("导入文本长度不符合要求");
+//            if(btn) btn.disabled = false;
+//            return false;
+//        }
+//    }
+</script>

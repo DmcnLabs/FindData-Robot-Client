@@ -1,0 +1,110 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Article settings</a></li>
+                    <li class="active">Label list</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                Label list
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    View and edit labels
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn  btn-info btn-sm btn-round"   onclick="javascript:window.location.href= '{:url('Tag/add')}' ">New label</button>
+                                </div>
+
+                            </div>
+                        </div><!-- /.page-header -->
+                        <form class="" action="{:url('Tag/sort')}" method="post">
+                            <table cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+
+                                        <th>ID</th>
+                                        <th>Label name</th>
+                                        <th>Creation date</th>
+                                        <th>Options</th>
+
+                                    </tr>
+                                    <!--数据行-->
+                                    {if empty($tagRes)}
+                                        <tr><td colspan="5" align="center" style="height:60px;color:#666;">No data available</td></tr>
+                                    {else/}
+                                    {volist name='tagRes' id='tag'}
+                                    <tr>
+                                        <td>{$tag.id}</td>
+                                        <td>{$tag.name}</td>
+                                        <td>{$tag.create_time}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-mini  btn-info btn-round" onclick="javascript:window.location.href= '{:url('Tag/edit',['id'=>$tag.id])}' "><i class="ace-icon fa fa-pencil-square-o "></i>edit</button>
+                                            <button class="btn btn-mini btn-danger tooltip-error runstyle  " id="{$tag.id}" type="button"  onclick="delData(this)" data-rel="tooltip" data-original-title="delete"><i class="ace-icon fa fa-times-circle"></i>delete</button>
+                                        </td>
+                                    </tr>
+                                {/volist}
+                                {/if}
+                                </tbody>
+                            </table>
+                            {$multipage}
+                        </form>
+
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+<script>
+    function delData(obj){
+        var id = obj.id;
+        var url = "{:url('tag/del',array('id'=>'replace'))}";
+        var url = url.replace('replace' , id);
+        bootbox.dialog({
+            message: "Are you sure to delete?",
+            buttons:
+                {
+                    "button" :
+                        {
+                            "label" : "Do not delete",
+                            "className" : "btn-sm"
+                        },
+                    "danger_one" :
+                        {
+                            "label" : "Delete now",
+                            "className" : "btn-sm btn-danger",
+                            "callback": function() {
+                                window.location.href=url;
+                            }
+                        }
+                }
+        });
+    }
+
+</script>

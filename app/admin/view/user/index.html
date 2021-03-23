@@ -1,0 +1,174 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">user management</a></li>
+                    <li class="active">User list</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                User list
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    View the list of administrative users
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!--<button type="button" class="btn  btn-info btn-sm btn-round" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">新增会员</button>-->
+                                    <button type="button" class="btn  btn-info btn-sm btn-round" onclick="javascript:window.location.href= '{:url('user/add')}' ">New users</button>
+
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content" style="width:350px;margin:180px auto" >
+                                                <div class="modal-body">
+                                                    <form action="{:url('user/add')}" method="POST" id="addsubmit" onsubmit="return validate(this)">
+                                                        <div class="form-group" >
+                                                            <label  for class="control-label ml35">username:</label>
+                                                            <input type="text" class="form-control inputstyle" id="addusername" name="username" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label ml35">password:</label>
+                                                            <input type="text" class="form-control inputstyle" id="adduserpwd" name="password" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label  class="control-label ml35 ">authgroup:</label>
+                                                            <select name="user_type" id="user_type" class="form-control inputstyle" >
+                                                                {volist name="authgroupres" id="authgroup"}
+                                                                <option value="{$authgroup.id}"  >{$authgroup.title}</option>
+                                                                {/volist}
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer" style="background-color: #fff;text-align: center">
+                                                            <button type="button" class="btn btn-default  btn-default btn-round " data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;
+                                                            <button type="submit" class="btn btn-default  btn-info btn-round ">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- /.page-header -->
+
+                            <table cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>UID</th>
+                                        <th>Username</th>
+                                        <th>AuthGroup</th>
+                                        <th>CreationDate</th>
+                                        <th>Options</th>
+                                    </tr>
+                                    <!--数据行-->
+                                    {if empty($userlist)}
+                                        <tr><td colspan="5" align="center" style="height:60px;color:#666;">No data available</td></tr>
+                                    {else/}
+                                    {volist name='userlist' id='vo'}
+                                    <tr>
+                                        <td>{$vo.uid}</td>
+                                        <td>{$vo.username}</td>
+                                        <td>{$vo.groupname}</td>
+                                        <td>{$vo.create_time}</td>
+                                        <td>
+                                                <button type="button"  class="btn btn-mini  btn-info btn-round" onclick="javascript:window.location.href= '{:url('user/edit',array('uid'=>$vo.uid))}' "><i class="ace-icon fa fa-pencil-square-o "></i>edit</button>
+                                                <button type="button" {if condition="$vo.uid eq 1 "} disabled {/if}  class="btn btn-mini  btn-danger btn-round" id="{$vo.uid}"  onclick="delData(this)" ><i class="ace-icon fa fa-times-circle "></i>delete</button>
+
+                                        </td>
+                                    </tr>
+                                {/volist}
+                                {/if}
+                                </tbody>
+                            </table>
+                        {$multipage}
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script>
+    function delData(obj){
+        var id = obj.id;
+        var url = "{:url('user/del',array('uid'=>'replace'))}";
+        var url = url.replace('replace' , id);
+        bootbox.dialog({
+            message: "Are you sure to delete",
+            buttons:
+                {
+                    "button" :
+                        {
+                            "label" : "Do not delete",
+                            "className" : "btn-sm"
+                        },
+                    "danger_one" :
+                        {
+                            "label" : "Delete now",
+                            "className" : "btn-sm btn-danger",
+                            "callback": function() {
+                                window.location.href=url
+                            }
+                        }
+                }
+        });
+    }
+
+
+    function validate (theform){
+        var addusername = $('#addusername').val();
+        var adduserpwd = $('#adduserpwd').val();
+        if(addusername == '' ){
+            Msg('The user name cannot be empty');
+            return false;
+        }
+        if(adduserpwd == '' ){
+            Msg('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+    function edit_validate (theform){
+        var editusername = $('#editusername').val();
+        var editpwd = $('#editpwd').val();
+
+        if(editusername == '' ){
+            Msg('The user name cannot be empty');
+            return false;
+        }
+        if(editpwd == '' ){
+            Msg('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+
+
+
+</script>

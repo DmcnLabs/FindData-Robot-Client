@@ -1,0 +1,248 @@
+<!-- 头部 -->
+{include file="public/top" /}
+<!-- /头部 -->
+<div class="main-container" id="main-container">
+    <!-- left -->
+    {include file="public/left" /}
+    <!-- /left -->
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i> <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">System settings</a></li>
+                    <li class="active">System settings</li>
+                </ul>
+                <!-- /.nav-search -->
+            </div>
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1>
+                                System settings
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    Basic function settings of the platform
+                                </small>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="post" name="thevalueform"  class="form-horizontal" id="theform" action="{:url('sysconf/sysset')}" enctype="multipart/form-data">
+                                        <div class="tabbable">
+                                            <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+                                                <li class="active">
+                                                    <a data-toggle="tab" href="#base" aria-expanded="true">Basic information</a>
+                                                </li>
+                                                <li class="">
+                                                    <a data-toggle="tab" href="#seo" aria-expanded="false">Site settings</a>
+                                                </li>
+                                                <li class="">
+                                                    <a data-toggle="tab" href="#accredit" aria-expanded="false">Client configuration</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="base" class="tab-pane active">
+                                                    <div class="space-12"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Website address </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="index_url"  class="col-xs-10 col-sm-5" value="{$systeminfo.index_url}" required>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">You can customize the address of the system home page by configuring this item, such as:http://www.xxx.com</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Website title </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="web_site_title" class="col-xs-10 col-sm-5" value="{$systeminfo.web_site_title}" required>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">Website Title foreground display title</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Website record number </label>
+                                                        <div class="col-sm-10" >
+                                                            <input type="text"  name="web_site_icp" class="col-xs-10 col-sm-5" value="{$systeminfo.web_site_icp}">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">Set the record number displayed at the bottom of the website</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Copyright information </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="web_site_copyright" class="col-xs-10 col-sm-5" value="{$systeminfo.web_site_copyright}">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">Set the copyright information displayed at the bottom of the website</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Site statistics </label>
+                                                        <div class="col-sm-10">
+                                                            <textarea name="web_site_statistics" id="web_site_statistics" cols="30" rows="5" class="col-xs-10 col-sm-5">{$systeminfo.web_site_statistics}</textarea>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">Support Baidu, Google, cnzz and other JavaScript statistical code</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > Local storage </label>
+                                                        <div class="col-sm-11">
+                                                            <select name="save_method" id="save_method" class="col-xs-5 col-sm-1">
+                                                                <option value="1" {if condition="$systeminfo.save_method eq '1'"} selected {/if} >Yes</option>
+                                                                <option value="0" {if condition="$systeminfo.save_method eq '0'"} selected {/if} >No</option>
+                                                            </select>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                    <span class="middle">After opening, the collected data will be read and stored in the local database</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > System switch </label>
+                                                        <div class="col-sm-11">
+                                                            <select name="toggle_web_site" id="toggle_web_site" class="col-xs-5 col-sm-1">
+                                                                <option value="1" {if condition="$systeminfo.toggle_web_site eq '1'"} selected{/if} >Yes</option>
+                                                                <option value="0" {if condition="$systeminfo.toggle_web_site eq '0'"} selected{/if} >No</option>
+                                                            </select>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                    <span class="middle">After closing the system, you will be prompted that the site is closed and cannot be accessed normally</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="space-12"></div>
+                                                    <div class="row ">
+                                                        <div class="col-xs-12 align-center">
+                                                            <input type="submit" name="thevaluesubmit" value="Submit" class="btn btn-info input-small btn-round" >
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="accredit" class="tab-pane">
+                                                    <div class="alert alert-info">
+                                                        Please visit the official website (https://finddata.io), Register an account and get the appKey/appSecret.
+                                                    </div>
+                                                    <div class="space-12"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > appKey </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="app_key" value="{$systeminfo.app_key}"  class="col-xs-10 col-sm-5">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > appSecret </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="app_secret"  value="{$systeminfo.app_secret}" class="col-xs-10 col-sm-5">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle"> </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-xs-12 align-center">
+                                                            <input type="submit" name="thevaluesubmit" value="Submit" class="btn btn-info input-small btn-round">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="seo" class="tab-pane">
+                                                    <div class="space-12"></div>
+                                                   <!-- <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > SEO标题 </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="web_site_title"  class="col-xs-10 col-sm-5" value="{$systeminfo.web_site_title}">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle"> 网站搜索引擎标题</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > SEO Keywords </label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text"  name="web_site_keyword"  class="col-xs-10 col-sm-5" value="{$systeminfo.web_site_keyword}">
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle"> Website search engine keywords</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 label_control no-padding-right" > SEO Description </label>
+                                                        <div class="col-sm-10">
+                                                            <textarea name="web_site_description" id="" cols="30" rows="5" class="col-xs-10 col-sm-5">{$systeminfo.web_site_description}</textarea>
+                                                            <span class="help-inline col-xs-12 col-sm-7 pt">
+                                                                <span class="middle">Website search engine description</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-xs-12 align-center">
+                                                            <input type="submit" name="thevaluesubmit" value="Submit" class="btn  btn-info input-small btn-round">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- /.page-header -->
+                    </div>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<script>
+
+    function validate (theform){
+        var addusername = $('#addusername').val();
+        var adduserpwd = $('#adduserpwd').val();
+        if(addusername == '' ){
+            alert('The user name cannot be empty');
+            return false;
+        }
+        if(adduserpwd == '' ){
+            alert('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+    function edit_validate (theform){
+        var editusername = $('#editusername').val();
+        var editpwd = $('#editpwd').val();
+
+        if(editusername == '' ){
+            alert('The user name cannot be empty');
+            return false;
+        }
+        if(editpwd == '' ){
+            alert('Password cannot be empty');
+            return false;
+        }
+        return true;
+    }
+
+
+</script>

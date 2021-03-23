@@ -1,0 +1,46 @@
+<!-- leftside -->
+<div id="sidebar" class="sidebar                  responsive">
+    <ul class="nav nav-list">
+
+
+        {volist name="menuArr" id="v"}
+        <li class="open " >
+            {empty name="$v['_data']"}
+            <a href="{:url($v.name)}">
+                <i class="menu-icon fa fa-{$v.icon}"></i>
+                {$v.title}
+            </a>
+            <b class="arrow"></b>
+            {else /}
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-{$v.icon}"></i>
+                <span class="menu-text">{$v.title}</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                {volist name="v['_data']" id="n"}
+                <li class="{$currentAction == $n['name'] ?'active' : ''}">
+                    <a href="{:url($n['name'])}">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        {$n.title}
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+                {/volist}
+            </ul>
+            {/empty}
+        </li>
+        {/volist}
+
+    </ul><!-- /.nav-list -->
+
+    <!-- #section:basics/sidebar.layout.minimize -->
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+
+
+</div> <!-- leftside end -->
