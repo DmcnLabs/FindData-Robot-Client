@@ -1409,7 +1409,7 @@ return  array(
     'robot_messagereplace' => 'Character before replacement',
     'robot_import_ignoreversion_0' => 'check ',
     'robot_import_ignoreversion_1' => 'No verification',
-    'common_submit_import' => '立即导入',
+    'common_submit_import' => 'Import now',
     'robot_robot_subject_no_key' => '标题不包含关键字，跳过',
     'robot_robot_subject_key_cancel' => '标题包含关键字，跳过',
     'robot_robot_subject_null' => '标题经处理后为空，跳过',
