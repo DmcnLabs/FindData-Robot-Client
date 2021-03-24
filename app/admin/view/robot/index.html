@@ -172,10 +172,10 @@
             var m = Math.floor(t / 1000 / 60 % 60);
             var s = Math.floor(t / 1000 % 60);
             if (document.getElementById("t_d") && t > 0) {
-                document.getElementById("t_d").innerHTML = d + "天";
-                document.getElementById("t_h").innerHTML = h + "时";
-                document.getElementById("t_m").innerHTML = m + "分";
-                document.getElementById("t_s").innerHTML = s + "秒";
+                document.getElementById("t_d").innerHTML = d + "day";
+                document.getElementById("t_h").innerHTML = h + "hour";
+                document.getElementById("t_m").innerHTML = m + "min";
+                document.getElementById("t_s").innerHTML = s + "sec";
             }
         }
 
@@ -208,7 +208,7 @@
                         v.mpage = parseInt(v.mpage);
                         v.lpage = parseInt(v.lpage);
                         //exvalue = v.crtcount+' / '+failvale+' / '+v.lpage+' / '+v.mpage;
-                        exvalue = '成功：'+v.succount+' | 重复：'+v.repcount+' | 失败：'+failvale;
+                        exvalue = 'success:'+v.succount+' | Repeat:'+v.repcount+' | Failed:'+failvale;
                         value = v.percount;
                         width = v.percount;
                         s_tr.find('.pos-rel').attr('data-original-title',exvalue);
@@ -266,23 +266,23 @@
                     }, 2000)
                 }else {
                     if(res=="INVALID-USERGROUP"){
-                        Msg("机器人并发数已达上限");
+                        Msg("The number of concurrent robots has reached the upper limit");
                     }else if(res=="INVALID-TOKEN"){
-                        Msg("机器人TOKEN异常，无法执行");
+                        Msg("Robot token is abnormal, unable to execute");
                     }else if(res=="INVALID-TYPE"){
-                        Msg("机器人求类型异常，无法执行");
+                        Msg("Robot type is abnormal, unable to execute");
                     }else if(res=="INVALID-ROBOTID"){
-                        Msg("机器人ID异常，无法执行");
+                        Msg("Robot ID is abnormal, unable to execute");
                     }else if(res=="INVALID-STATUS-9"){
-                        Msg("机器人状态为正常时才可执行");
+                        Msg("Only when the robot is in normal state can it be executed");
                     }else if(res=="INVALID-STATUS"){
-                        Msg("机器人状态异常，无法执行");
+                        Msg("The robot state is abnormal and cannot be executed");
                     }
                     setTimeout(function () {
                         btn.removeClass("disabled");
                         btn.html('<i class="ace-icon fa fa-play "></i>');
                     }, 2000)
-                }
+        }
             });
 
         }
