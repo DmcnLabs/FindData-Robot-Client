@@ -4065,7 +4065,7 @@ body.mob-safari .sidebar.sidebar-fixed {
 }
 .main-content-inner {
   float: left;
-  /*width: 100%;*/
+  width: 100%;
 }
 .main-content .sidebar:before {
   top: 150px;
