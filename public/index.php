@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 
 // [ 应用入口文件 ]
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 // 定义应用目录
 //header("Content-type: text/html; charset=utf-8");
